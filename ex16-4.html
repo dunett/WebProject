@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Jump for Joy</title>
+<!-- <link href="styles/my_style.css" rel="stylesheet"> -->
+<style type="text/css">
+div{
+	float:left;
+	height:245px;
+	text-align:left;
+	border:solid #000 3px;
+}
+#header{
+	width:100%;
+	border:0px;
+	height:50px;
+}
+#main{
+	background-color:grey;
+	height:600px;
+}
+</style>
+<script src="./jquery-1.11.3.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('.sel').click(checkForCode);
+	function getRandom(num){
+		var my_num = Math.floor(Math.random()*num);
+		return my_num;
+	}
+	var hideCode = function(){
+		var numRand = getRandom(4);
+		$(".sel").each(function(index, value){
+			if(numRand == index){
+				$(this).append("<span id='has_discount'></span>");
+				return false;
+			}
+		});
+	}
+	function checkForCode(){
+		var discount;
+		if($.contains(this, document.getElementById("has_discount"))){
+			var my_num = getRandom(5);
+			discount = "<p>Your Discount is "+my_num+"%</p>";
+		}else{
+			discount = "<p>Sorry, no discount this time!</p>";
+		}
+		$(this).append(discount);
+		
+		$(".sel").each(function(){
+			$(this).unbind('click');
+		});
+	}
+});
+</script>
+</head>
+<body>
+2010270013 º±øÎ¡ÿ
+	<div id="header">
+	<h2>Jump for Joy sale</h2>
+	</div>
+	<div id="main">
+	<div class="sel"><img src="images/jump1.jpg"/></div>
+	<div class="sel"><img src="images/jump2.jpg"/></div>
+	<div class="sel"><img src="images/jump3.jpg"/></div>
+	<div class="sel"><img src="images/jump4.jpg"/></div>
+	</div>
+	<p></p>
+</body>
+</html>

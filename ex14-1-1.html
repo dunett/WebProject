@@ -1,0 +1,98 @@
+<meta charset="utf-8">
+<html>
+<script type="text/javascript">
+var lastReportTime = 0;
+
+/* window.onload = function() {
+    var interval = setInterval(handleRefresh, 3000);
+    handleRefresh();
+} */
+window.onload = function() {
+	var url = "http://openapi.seoul.go.kr:8088/564e576d4364756e363849594e624d/json/CardSubwayStatisticsService/1/530/201409/";
+    var request = new XMLHttpRequest();
+    request.open("GET",url);
+    request.onload = function(){
+    	if(request.status == 200){
+    		updateSales(request.responseText);
+    	}
+    };
+    request.send(null)
+    //var interval = setInterval(handleRefresh, 3000);
+    //handleRefresh();
+}
+
+function updateSales(responseText){
+	var subwayDiv = document.getElementById("subwaypeople");
+	subwayDiv.innerHTML = responseText;
+}
+
+function handleRefresh() {
+    console.log("here");
+    var url = "http://openapi.seoul.go.kr:8088/736b696d6f6b373732313233/json/CardSubwayStatisticsService/1/530/201409/";
+    $.getJSON(url + "?callback=?", updateTraffic);
+}
+
+function updateTraffic(subwaypeople) {
+    var subwayDiv = document.getElementById("subwaypeople");
+    var traffic = subwaypeople.CardSubwayStatisticsService.row;
+    for (var i = 0; i < traffic.length; i++) {
+        var div = document.createElement("div");
+        div.setAttribute("class", "subwayItem");
+        div.innerHTML =
+            traffic[i].USE_MON + " : " + traffic[i].LINE_NUM + " : " + traffic[i].SUB_STA_NM + " : " + traffic[i].RIDE_PASGR_NUM + " : " + traffic[i].ALIGHT_PASGR_NUM;
+            if (subwayDiv.childElementCount == 0) {
+                subwayDiv.appendChild(div);
+            } else {
+                subwayDiv.insertBefore(div, subwayDiv.firstChild);
+            }
+    }
+
+//    if (traffic.length > 0) {
+//        lastReportTime = subwaypeople[traffic.length - 1].time;
+//    }
+ }
+</script>
+<head>
+	<!-- <style type="text/css">
+	body {
+		margin-left: 40px;
+		margin-right: 40px;
+	}
+	div#subwaypeople {
+		background-color: #d9d9d9;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;
+		margin: 10px 0px 0px 0px;
+		padding: 0px;
+		border: 1px solid #d9d9d9;
+	}
+	div.subwayItem {
+		font-family: Verdana, Helvetica, sans-serif;
+		color: #434343;
+		padding: 10px;
+	}
+	div.subwayItem:nth-child(2n) {
+		background-color: #fafafa;
+	}
+	div.subwayItem:first-child {
+		-webkit-border-top-left-radius: 6px;
+		-webkit-border-top-right-radius: 6px;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+	}
+	div.subwayItem:last-child {
+		-webkit-border-bottom-left-radius: 6px;
+		-webkit-border-bottom-right-radius: 6px;
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 6px;
+	}
+	</style> -->
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+</head>
+<body>
+	<h5>2010270013 선용준</h5>
+	<h3>지하철 승하차인원 조회 서비스</h3>
+	<div id="subwaypeople"></div>
+</body>
+</html>

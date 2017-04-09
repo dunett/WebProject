@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+window.onload = function(){
+	var url = "http://wickedlysmart.com/ifeelluckytoday";
+	var request = new XMLHttpRequest();
+	request.onload = function(){
+		if(request.status == 200){
+			displayLuck(request.responseText);
+		}
+	};
+	request.open("GET",url);
+	request.send(null);
+}
+
+function diplayLuck(luck){
+	var p = document.getElementById("lcuk");
+	p.innerHTML = "Today you are " + luck
+}
+</script>
+<body>
+2010270013선용준
+</body>
+</html>

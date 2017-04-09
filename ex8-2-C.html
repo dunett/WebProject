@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+<body>
+2010270013 º±øÎ¡ÿ
+<p>Click on a CD to display album information.</p>
+<p id='showCD'></p>
+<table id="demo"></table>
+
+<script>
+var x,xmlhttp,xmlDoc
+xmlhttp = new XMLHttpRequest();
+xmlhttp.open("GET", "bookstore.xml", false);
+xmlhttp.send();
+xmlDoc = xmlhttp.responseXML; 
+x = xmlDoc.getElementsByTagName("bookstore");
+table="<tr><th>Author</th><th>Title</th></tr>";
+for (i = 0; i <x.length; i++) { 
+  table += "<tr onclick='displayCD(" + i + ")'><td>";
+  table += x[i].getElementsByTagName("author")[0].childNodes[0].nodeValue;
+  table += "</td><td>";
+  table +=  x[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+  table += "</td></tr>";
+}
+document.getElementById("demo").innerHTML = table;
+
+function displayCD(i) {
+  document.getElementById("showCD").innerHTML =
+  "Author: " +
+  x[i].getElementsByTagName("author")[0].childNodes[0].nodeValue +
+  "<br>Title: " +
+  x[i].getElementsByTagName("title")[0].childNodes[0].nodeValue +
+  "<br>Year: " + 
+  x[i].getElementsByTagName("year")[0].childNodes[0].nodeValue +
+  "<br>Price: " + 
+  x[i].getElementsByTagName("price")[0].childNodes[0].nodeValue;
+}
+</script>
+
+</body>
+</html>

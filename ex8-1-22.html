@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+2010270013 º±øÎ¡ÿ <p id="demo"></p>
+
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        myFunction(xhttp);
+    }
+}
+xhttp.open("GET", "books.xml", true);
+xhttp.send();
+
+function myFunction(xml) {
+    var x, y, i, newElement, txt, xmlDoc;
+    xmlDoc = xml.responseXML;
+    newElement = xmlDoc.createElement("edition");
+    x = xmlDoc.getElementsByTagName("book")[0]
+    x.appendChild(newElement);
+
+   // Display all elements
+    xlen = x.childNodes.length;
+    y = x.firstChild;
+    txt = "";
+    for (i = 0; i < xlen; i++) {
+        if (y.nodeType == 1) {
+            txt += y.nodeName + "<br>";
+        }
+        y = y.nextSibling;
+    }
+    document.getElementById("demo").innerHTML = txt;
+}
+</script>
+
+</body>
+</html>

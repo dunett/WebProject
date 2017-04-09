@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+2010270013 º±øÎ¡ÿ
+<p id="demo"></p>
+
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        myFunction(xhttp);
+    }
+}
+xhttp.open("GET", "books.xml", true);
+xhttp.send();
+
+function myFunction(xml) {
+    var xmlDoc = xml.responseXML;
+    var x = xmlDoc.getElementsByTagName("book")[0]
+    var y = x.getAttributeNode("category");
+    var txt = y.nodeValue + "<br>";
+    y.nodevalue ="food";
+    txt += y.nodevalue;
+    document.getElementById("demo").innerHTML = txt;
+}
+</script>
+</body>
+</html>

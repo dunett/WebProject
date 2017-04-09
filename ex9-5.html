@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Movie (JSON)</title>
+<script src="myLoc4.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaCCyZZJZrJXIUc3GmolVr3sMDq8cfdOA &signed_in=true&callback=updateSales"></script>
+<link rel="stylesheet" href="myLoc.css">
+<style type="text/css">
+body {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+div#sales {
+	background-color: #d9d9d9;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 1px solid #d9d9d9;
+}
+div.saleItem {
+	font-family: Verdana, Helvetica, sans-serif;
+	color: #434343;
+	padding: 10px;
+}
+div.saleItem:nth-child(2n) {
+	background-color: #fafafa;
+}
+div.saleItem:first-child {
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+div.saleItem:last-child {
+	-webkit-border-bottom-left-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+</style>
+</head>
+<body>
+<script type="text/javascript">
+/* window.onload = function(position){
+	var url = "http://localhost:8080/gumball/Movie.json";
+	var request = new XMLHttpRequest();
+	request.open("GET",url);
+	request.onload = function(){
+		if(request.status == 200){
+			updateSales(request.responseText ,position);
+		}
+	};
+	request.send(null);
+	getMyLocation();
+} */
+var citymap;
+		
+function updateSales(responseText ,
+){
+	var salesDiv = document.getElementById("sales");
+	var distance = document.getElementById("distance");
+	var sales = JSON.parse(responseText);
+	var googleLatAndLong = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	citymap= {
+			  anseoung: {
+			    center: googleLatAndLong/* ,
+			    population: 50000 */
+			  }
+			};
+	var map = new google.maps.Map(document.getElementById('map'), {
+	    zoom: 8,
+	    center: googleLatAndLong,
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	  });
+	for (var city in citymap) {
+	    // Add the circle for this city to the map.
+	    var cityCircle = new google.maps.Circle({
+	      strokeColor: '#FF0000',
+	      strokeOpacity: 0.8,
+	      strokeWeight: 2,
+	      fillColor: '#FF0000',
+	      fillOpacity: 0.35,
+	      map: map,
+	      center: citymap[city].center,
+	      radius: 50000
+	    	  /* Math.sqrt(citymap[city].population) * 100 */
+	    });
+	  }
+	addMarker(map, googleLatAndLong, "현재위치", "이곳은 현재위치입니다.");
+	/* var mapOptions = {
+			zoom: 8,
+			center: googleLatAndLong,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	var mapDiv = document.getElementById("map");
+	map = new google.maps.Map(mapDiv, mapOptions); */
+	var now=new Date().getTime();
+	for(var i = 0; i < sales.length; i++){
+		var tf = false;
+		var sale = sales[i];
+		var LatAndLong = new google.maps.LatLng(sale.latitude, sale.longitude);
+		var div2 = document.createElement("div");
+		var km = computeDistance(position.coords , sale.latitude, sale.longitude);
+		div2.innerHTML = "현재 위치로 부터 " + sale.theater + "까지 " + km + " km 떨어져 있습니다.";
+		distance.appendChild(div2);
+		if(km < 50){
+		for(var j=0; j<sale.showtime.length ;j++){
+		var showtime=getTimeFromString(sale.showtime[j]);
+		if((showtime-now)>0){
+		if(tf==false){
+			addMarker(map, LatAndLong, sale.theater, "극장: "+sale.theater+" 영화제목: "+sale.title +"다음 상영시간: "+sale.showtime[j]);
+			tf =true;
+		}
+		var div = document.createElement("div");
+		div.setAttribute("class", "saleItem");
+		div.innerHTML = sale.theater + " " + sale.title + "&nbsp;&nbsp;&nbsp;" + sale.showtime[j];
+		salesDiv.appendChild(div);
+		}
+		}
+	}
+	}
+}
+
+function getTimeFromString(timeString){
+	var theTime=new Date();
+	var time = timeString.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+	theTime.setHours(parseInt(time[1])+(time[3]?12:0));
+	theTime.setMinutes(parseInt(time[2])||0);
+	return theTime.getTime();
+}
+
+
+function computeDistance(startCoords, destLat,destLong){
+	var startLatRads = degreeToRadians(startCoords.latitude);
+	var startLongRads = degreeToRadians(startCoords.longitude);
+	var destLatRads = degreeToRadians(destLat);
+	var destLongRads = degreeToRadians(destLong);
+	
+	var Radius = 6371;
+	var distance = Math.acos(Math.sin(startLatRads)* Math.sin(destLatRads) + 
+			Math.cos(startLatRads) * Math.cos(destLatRads) *
+			Math.cos(startLongRads - destLongRads)) * Radius;
+	
+	return distance;
+}
+
+function degreeToRadians(degrees){
+	var radians = (degrees * Math.PI)/180;
+	return radians;
+}
+</script>
+2010270013 선용준
+<h1>Theater</h1>
+<div id="map">
+</div>
+<div id="distance">
+</div>
+<div id="sales">
+<div>&nbsp;영화극장&nbsp;영화제목&nbsp;상영시간</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+#total{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+#footer{
+	background-color: #e7e7e7;
+	border:1px solid black;
+	position: relative;
+	width: 100%;
+	height: 12%;
+}
+#body{
+	border:1px solid black;
+	position: relative;
+	height: 88%;
+}
+#left{
+	background-color: #e7e7e7;
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 48%;
+}
+#right{
+	background-color: #e7e7e7;
+	top: 0;
+	left: 60%;
+	position: absolute;
+	width: 40%;
+	height: 100%;
+}
+#top{
+	border:1px solid black;
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 33%;
+}
+#down{
+	top: 33%;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 67%;
+}
+#map{
+	border: 2px solid #acaca6;
+	width: 99%;
+	height: 99%;
+}
+table{
+	border:1px solid black;
+	width: 100%;
+	height: 100%;
+}
+tr{
+	width: 100%;
+	height: 20%;
+}
+th{
+	background-color: #c3c3c3;
+	width: 80px;
+}
+

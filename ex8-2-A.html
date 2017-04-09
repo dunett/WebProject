@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+2010270013 º±øÎ¡ÿ
+<div id='showCD'></div>
+
+<script>
+displayCD(0);
+
+function displayCD(i) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            myFunction(xmlhttp, i);
+        }
+    }
+    xmlhttp.open("GET", "bookstore.xml", true);
+    xmlhttp.send();
+}
+
+function myFunction(xml, i) {
+    var xmlDoc = xml.responseXML; 
+    x = xmlDoc.getElementsByTagName("bookstore");
+    document.getElementById("showCD").innerHTML =
+    "Author: " +
+    x[i].getElementsByTagName("author")[0].childNodes[0].nodeValue +
+    "<br>Title: " +
+    x[i].getElementsByTagName("title")[0].childNodes[0].nodeValue +
+    "<br>Year: " + 
+    x[i].getElementsByTagName("year")[0].childNodes[0].nodeValue +
+    "<br>Price: " + 
+    x[i].getElementsByTagName("price")[0].childNodes[0].nodeValue;
+}
+</script>
+
+</body>
+</html>

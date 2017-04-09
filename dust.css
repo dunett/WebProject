@@ -1,0 +1,175 @@
+body {
+background-color: #eff8f8;
+background-image:url(body-bg.gif);
+background-repeat: repeat-x;
+
+  margin: 0;
+  padding:10px;
+  line-height: 1.4em;
+  font-size: 130%;
+}
+span
+{
+	text-decoration:none;
+	border-bottom:2px solid   #acaca6;
+}
+
+#map
+{
+ border: 2px solid #acaca6;
+}
+select{
+	width:150px;
+	font-size: 80%;     
+ 	vertical-align:middle;
+ 	margin:10px;
+}
+button{
+	width:80px;
+	height:20px;
+}
+
+#title
+{
+    margin:20px auto; 
+	width:85%;
+    text-align: center;
+	font-size: 150%;
+}
+
+#b2
+{
+    margin:8.5px auto 0;
+    border: 2px solid #acaca6;
+    background-color:#eeeeee; 
+}
+
+#blocks
+{
+    width:85%;
+    height:650px;
+    margin:0 auto;
+    position:relative;
+}
+
+#block1
+{   
+    top:0;
+    left:0;
+    position: absolute;
+    height:70%;
+    width:50%;
+}
+
+#block2
+{
+	text-align: center;
+    top:0;
+    right:0;
+    position: absolute;
+    height:15%;
+    width:50%;
+}
+
+#block3
+{
+    top:15%;
+    right:0;
+    position: absolute;
+    height:55%;
+    width:50%;
+}
+
+/*
+#block3
+{
+    top:15%;
+    right:25%;
+    position: absolute;
+    height:55%;
+    width:25%;
+}
+
+
+#block4
+{
+    top:15%;
+    right:0;
+    position: absolute;
+    height:55%;
+    width:25%;
+}
+
+
+#block5
+{
+    
+    bottom:0;
+    left:0;
+    position: absolute;
+    height:30%;
+    width:100%;
+}
+
+*/
+
+/*
+#date{
+  margin:8px;
+	font-size:80%;
+
+}
+
+
+#infotable{
+ margin:2px auto 0;
+  border: 0px solid #acaca6;
+
+ 
+//   border-collapse: collapse; 
+ 
+	width:99%;	
+	height:30px;
+	font-size:70%;
+
+}
+*/
+
+
+table {
+  margin:10px auto 0;
+  border: 2px solid #acaca6;
+  border-collapse: collapse;
+	width:99%;
+}
+td{
+  border-bottom: 0px solid #333333;
+  text-align: center;
+  width:50%;
+    background: #eff8ff;
+    font-size:90%;
+/*        font-weight:bold; */
+
+
+}
+th {
+  background: #EEEEDE;
+    width:50%;
+	
+   font-weight:normal;
+}
+
+caption {
+  background: #E0E0Ea;
+  margin: 0;
+  border: 2px solid #acaca6;
+  border-bottom: none;
+  padding: 6px 16px;
+}
+
+/*
+label{
+	font-size:80%;
+
+}
+*/

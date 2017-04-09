@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+2010270013 º±øÎ¡ÿ <p id="demo"></p>
+
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        myFunction(xhttp);
+    }
+}
+xhttp.open("GET", "books.xml", true);
+xhttp.send();
+
+function myFunction(xml) {
+    var x, xmlDoc, txt;
+    xmlDoc = xml.responseXML;
+    txt = "Number of book nodes before removeChild(): " +
+    xmlDoc.getElementsByTagName("book").length + "<br>";
+    x = xmlDoc.getElementsByTagName("book")[0];
+    x.parentNode.removeChild(x);
+    txt += "Number of book nodes after removeChild(): " +
+    xmlDoc.getElementsByTagName("book").length;
+    document.getElementById("demo").innerHTML = txt;
+}
+</script>
+
+</body>
+</html>

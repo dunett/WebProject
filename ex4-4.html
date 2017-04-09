@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+function Movie(title, genre, rating, showtimes){
+	this.title = title;
+	this.genre = genre;
+	this.rating = rating;
+	this.showtimes = showtimes;
+	this.getNextShowing = function(){
+		var now = new Date().getTime();
+		for(var i = 0; i < this.showtimes; i++){
+			var showtime = getTimeFromString(this.showtimes[i]);
+			if((showtime - new) > 0){
+				return "2010270013 선용준 \n Next showing of " + this.title + "is " + this.showtimes[i];
+			}
+		}
+	};
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

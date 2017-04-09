@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+2010270013 º±øÎ¡ÿ
+<p id="demo"></p>
+
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        myFunction(xhttp);
+    }
+}
+xhttp.open("GET", "books.xml", true);
+xhttp.send();
+
+function myFunction(xml) {
+    var x, i, xmlDoc, txt;
+    xmlDoc = xml.responseXML;
+    txt = "";
+    x = xmlDoc.documentElement.childNodes;
+    for (i = 0; i < x.length; i++) { 
+        if (x[i].nodeType == 1) {
+            txt += x[i].nodeName + "<br>";
+        }
+    }
+    document.getElementById("demo").innerHTML = txt; 
+}
+</script>
+
+</body>
+</html>

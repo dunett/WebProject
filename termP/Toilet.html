@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>화장실을 부탁해</title>
+<link href="style/Toilet.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"/>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="script/Toilet.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div data-role="page" id="total">
+	<div data-role="content" id="body">
+		<div id="left"><div id="map"></div></div>
+		<div id="right">
+			<div id="top" align="center">
+			<br> 
+			<input type="text" id="loc"><button id="search">검색</button><button id="myloc">내위치</button>
+			<br>
+			</div>
+			<div id="down">
+			<table>
+			<tr>
+			<th>출발지</th>
+			<td colspan="4" id="srt">전체보기에서는 제공되지 않습니다.</td>
+			</tr>
+			<tr>
+			<th>출발주소</th>
+			<td colspan="4" id="srtA">전체보기에서는 제공되지 않습니다.</td>
+			</tr>
+			<tr align="center">
+			<td colspan="2" id="distance" style="width: 40%"></td>
+			<td id="point" style="width: 15%"><img src="images/point1.png"></td>
+			<td colspan="2" id="time" style="width: 40%"></td>
+			</tr>
+			<tr>
+			<th>목적지</th>
+			<td colspan="4" id="dst">전체보기에서는 제공되지 않습니다.</td>
+			</tr>
+			<tr>
+			<th>목적주소</th>
+			<td colspan="4" id="dstA">전체보기에서는 제공되지 않습니다.</td>
+			</tr>
+			</table>
+			</div>
+		</div>
+	</div>
+	<div data-role="footer" align="center" id="footer">
+	※소요시간은 성인 평균 속도인 4km/h로 계산했습니다.<br>
+	※검색시 반경 1km안에 화장실을 보여줍니다.<br>
+	<b>Copyright (C) 2015 선용준 all rights reserved.</b>
+	</div>
+</div>
+</body>
+</html>

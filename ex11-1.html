@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Look What I Drew</title>
+<style>
+	canvas{border: 1px solid black;}
+</style>
+<script>
+window.onload = function(){
+	var canvas = document.getElementById("tshirtCanvas");
+	
+	var context = canvas.getContext("2d");
+	
+	context.fillRect(10, 10, 100, 100);
+};
+</script>
+</head>
+<body>
+<p>2010270013 선용준</p>
+	<canvas width="600" height="200" id="tshirtCanvas" style="z-index: 2"></canvas>
+</body>
+</html>

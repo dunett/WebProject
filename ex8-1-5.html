@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+2010270013 º±øÎ¡ÿ
+<h2>Using the XMLHttpRequest object</h2>
+
+<button type="button" onclick="loadXMLDoc()">Change Content</button>
+
+<p id="demo"></p>
+
+<script>
+function loadXMLDoc() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      document.getElementById("demo").innerHTML =
+      xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("GET", "xmlhttp_info.txt", true);
+  xmlhttp.send();
+}
+</script>
+
+</body>
+</html>

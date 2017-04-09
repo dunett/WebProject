@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mighty Gumball (JSON)</title>
+<style type="text/css">
+body {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+div#sales {
+	background-color: #d9d9d9;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 1px solid #d9d9d9;
+}
+div.saleItem {
+	font-family: Verdana, Helvetica, sans-serif;
+	color: #434343;
+	padding: 10px;
+}
+div.saleItem:nth-child(2n) {
+	background-color: #fafafa;
+}
+div.saleItem:first-child {
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+div.saleItem:last-child {
+	-webkit-border-bottom-left-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+</style>
+</head>
+<body>
+<script type="text/javascript">
+window.onload = function(){
+	setInterval(handleRefresh, 3000);
+}
+
+function handleRefresh(){
+	alert("i'm alive");
+}
+
+function updateSales(sales){
+	var salesDiv = document.getElementById("sales");
+	for(var i = 0; i < sales.length; i++){
+		var sale = sales[i];
+		var div = document.createElement("div");
+		div.setAttribute("class", "saleItem");
+		div.innerHTML = sale.name + " sold " + sale.sales + " gumballs";
+		salesDiv.appendChild(div);
+	}
+}
+</script>
+<h1>Mighty Gumball Sales</h1>
+2010270013º±øÎ¡ÿ
+<div id="sales">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>TweetShirt</title>
+<style>
+	canvas{border: 1px solid black;}
+</style>
+<script src="tweetshirt.js"></script>
+</head>
+<body>
+<p>2010270013 선용준</p>
+<h1>TweetShirt</h1>
+	<canvas width="600" height="200" id="tshirtCanvas">
+		<p>Please upgrade your browser to use TweetShirt!</p>
+	</canvas>
+	<form>
+	<p>
+		<label for="backgroundColor">Select background color:</label>
+		<select id="backgroundColor">
+			<option value="white" selected="selected">White</option>
+			<option value="Black">Black</option>
+		</select>
+	</p>
+	<p>
+		<label for="shape">Circles or squares?</label>
+		<select id="shape">
+			<option value="none" selected="selected">Neither</option>
+			<option value="circles">Circles</option>
+			<option value="squares">Squares</option>
+		</select>
+	</p>
+	<p>
+		<label for="foregroundColor">Select text color:</label>
+		<select id="foregroundColor">
+			<option value="black" selected="selected">Black</option>
+			<option value="white">White</option>
+		</select>
+	</p>
+	<p>
+		<label for="tweets">pick a tweet:</label>
+		<select id="tweets">
+		</select>
+	</p>
+	<p>
+		<input type="button" id="previewButton" value="Preview">
+	</p>
+	</form>
+	<script src="http://tweetshirt.wickedlysmart.com/?callback=updateTweets">
+	</script>
+</body>
+</html>

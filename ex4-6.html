@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+function Movie(movie, title, showtimes){
+	this.movie=movie;
+	this.title=title;
+	this.showtimes=showtimes;
+
+	this.getNextShowing=function(){
+		var salesDiv = document.getElementById("sales");
+		var now=new Date().getTime();
+		for(var i=0; i<this.showtimes.length ;i++){
+			var showtime=getTimeFromString(this.showtimes[i]);
+			if((showtime-now)>0){
+				/* return "2010270013 선용준 \n Next showing of " + this.title + "is" + this.showtimes[i]; */
+				var div = document.createElement("div");
+				div.setAttribute("class", "saleItem");
+				div.innerHTML = this.movie + "\t" + this.title + "\t" + this.showtimes[i];
+				salesDiv.appendChild(div);
+			}
+		}
+	};
+}
+function updateSales(responseText){
+	var salesDiv = document.getElementById("sales");
+	var sales = JSON.parse(responseText);
+	for(var i = 0; i < sales.length; i++){
+		var sale = sales[i];
+		var div = document.createElement("div");
+		div.setAttribute("class", "saleItem");
+		div.innerHTML = sale.name + " sold " + sale.sales + " gumballs";
+		salesDiv.appendChild(div);
+	}
+}
+function getTimeFromString(timeString){
+	var theTime=new Date();
+	var time = timeString.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+	theTime.setHours(parseInt(time[1])+(time[3]?12:0));
+	theTime.setMinutes(parseInt(time[2])||0);
+	return theTime.getTime();
+}
+var anseoungMovie=new Movie("안성극장",
+			  "안성동무 날래 나오라우",
+			  ["1:00pm", "5:00pm", "7:00pm"]);
+var zongMovie=new Movie("중대극장",
+			  "중대는 사건사고가 많다",
+			  ["3:00pm", "7:00pm", "11:00pm"]);
+var hanMovie=new Movie("한경극장",
+			  "한경제클라스",
+			  ["5:00pm", "9:00pm"]);
+
+
+</script>
+</head>
+<body>
+<H1>CINEMA</H1>
+<div id="movie">
+<div>극장\t영화이름\t상영시간</div>
+</div>
+</body>
+</html>

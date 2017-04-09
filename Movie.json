@@ -1,0 +1,3 @@
+[{"theater":"Atheater","title":"Leave me","showtime":["5:00pm","6:00pm","12:00pm"],"latitude":"37","longitude":"127"},
+{"theater":"Btheater","title":"bye bye bye","showtime":["5:00pm","6:00pm","8:00pm"],"latitude":"37.01","longitude":"127.5"},
+{"theater":"Ctheater","title":"see you agains","showtime":["7:00pm","8:00pm","9:00pm"],"latitude":"36.5","longitude":"127.5"}]

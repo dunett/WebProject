@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+2010270013 º±øÎ¡ÿ <p id="demo"></p>
+
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        myFunction(xhttp);
+    }
+}
+xhttp.open("GET", "books.xml", true);
+xhttp.send();
+
+function myFunction(xml) {
+    var xmlDoc = xml.responseXML;
+    var newNode = xmlDoc.createElement("book");
+    var x = xmlDoc.documentElement;
+    var y = xmlDoc.getElementsByTagName("book");
+    document.getElementById("demo").innerHTML =
+    "Book elements before: " + y.length + "<br>";
+
+    x.insertBefore(newNode, y[3]);
+    document.getElementById("demo").innerHTML +=
+    "Book elements after: " + y.length;
+}
+</script>
+
+</body>
+</html>

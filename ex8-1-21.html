@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+2010270013 º±øÎ¡ÿ <p id="demo"></p>
+
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        myFunction(xhttp);
+    }
+}
+xhttp.open("GET", "books.xml", true);
+xhttp.send();
+
+function myFunction(xml) {
+    var x, newCDATA, xmlDoc;
+    xmlDoc = xml.responseXML;
+    newCDATA = xmlDoc.createCDATASection("Special Offer & Book Sale");
+    x = xmlDoc.getElementsByTagName("book")[0];
+    x.appendChild(newCDATA);
+    document.getElementById("demo").innerHTML = x.lastChild.nodeValue;
+}
+</script>
+
+</body>
+</html>
