@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Movie (JSON)</title>
+<script src="mightgumball.js"></script>
+<style type="text/css">
+body {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+div#sales {
+	background-color: #d9d9d9;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 1px solid #d9d9d9;
+}
+div.saleItem {
+	font-family: Verdana, Helvetica, sans-serif;
+	color: #434343;
+	padding: 10px;
+}
+div.saleItem:nth-child(2n) {
+	background-color: #fafafa;
+}
+div.saleItem:first-child {
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+div.saleItem:last-child {
+	-webkit-border-bottom-left-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+</style>
+</head>
+<body>
+<script type="text/javascript">
+window.onload = function(){
+	var url = "http://dunett.dothome.co.kr/movieinfo.json";
+	var request = new XMLHttpRequest();
+	request.open("GET",url);
+	request.onload = function(){
+		if(request.status == 200){
+			updateSales(request.responseText);
+		}
+	};
+	request.send(null);
+}
+
+function updateSales(responseText){
+	var salesDiv = document.getElementById("sales");
+	var distance = document.getElementById("distance");
+	var sales = JSON.parse(responseText);
+	var now=new Date().getTime();
+	for(var i = 0; i < sales.length; i++){
+		var sale = sales[i];
+		var div2 = document.createElement("div");
+		var km = computeDistance(sale.latitude, sale.longitude);
+		div2.innerHTML = "현재 위치로 부터 " + sale.theater + "까지 " + km + " km 떨어져 있습니다.";
+		distance.appendChild(div2);
+		if(km < 50){
+		for(var j=0; j<sale.showtime.length ;j++){
+		var showtime=getTimeFromString(sale.showtime[j]);
+		if((showtime-now)>0){
+		var div = document.createElement("div");
+		div.setAttribute("class", "saleItem");
+		div.innerHTML = sale.theater + " " + sale.title + "&nbsp;&nbsp;&nbsp;" + sale.showtime[j];
+		salesDiv.appendChild(div);
+		}
+		}
+	}
+	}
+}
+
+function getTimeFromString(timeString){
+	var theTime=new Date();
+	var time = timeString.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+	theTime.setHours(parseInt(time[1])+(time[3]?12:0));
+	theTime.setMinutes(parseInt(time[2])||0);
+	return theTime.getTime();
+}
+
+
+function computeDistance(destLat, destLong){
+	var startLatRads = degreeToRadians(37.0125);
+	var startLongRads = degreeToRadians(127.2646);
+	var destLatRads = degreeToRadians(destLat);
+	var destLongRads = degreeToRadians(destLong);
+	
+	var Radius = 6371;
+	var distance = Math.acos(Math.sin(startLatRads)* Math.sin(destLatRads) + 
+			Math.cos(startLatRads) * Math.cos(destLatRads) *
+			Math.cos(startLongRads - destLongRads)) * Radius;
+	
+	return distance;
+}
+
+function degreeToRadians(degrees){
+	var radians = (degrees * Math.PI)/180;
+	return radians;
+}
+</script>
+<h1>2010270013 선용준</h1>
+<h1>Theater</h1>
+<div id="distance">
+</div>
+<div id="sales">
+<div>&nbsp;영화극장&nbsp;&nbsp;영화제목&nbsp;&nbsp;상영시간</div>
+</div>
+</body>
+</html>

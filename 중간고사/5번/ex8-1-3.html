@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+<body>
+2010270013 º±øÎ¡ÿ<br>
+<input type="button" value="get my cd collection" onclick="xmlview()">
+<p id='showCD'></p>
+<table id="demo"></table>
+
+<script>
+var x,xmlhttp,xmlDoc
+function xmlview(){
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("GET", "cd_catalog.xml", false);
+	xmlhttp.send();
+	xmlDoc = xmlhttp.responseXML; 
+	x = xmlDoc.getElementsByTagName("CD");
+	table="<tr><th>Artist</th><th>Title</th><th>Country</th><th>Company</th></tr>";
+	for (i = 0; i <x.length; i++) { 
+	  table += "<tr onclick='displayCD(" + i + ")'><td>";
+	  table += x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue;
+	  table += "</td><td>";
+	  table +=  x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue;
+	  table += "</td><td>";
+	  table +=  x[i].getElementsByTagName("COUNTRY")[0].childNodes[0].nodeValue;
+	  table += "</td><td>";
+	  table +=  x[i].getElementsByTagName("COMPANY")[0].childNodes[0].nodeValue;
+	  table += "</td></tr>";
+	}
+	document.getElementById("demo").innerHTML = table;
+}
+
+function displayCD(i) {
+	x = xmlDoc.getElementsByTagName("CD");
+  document.getElementById("showCD").innerHTML =
+  "Artist: " +
+  x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+  "<br>Title: " +
+  x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+  "<br>Country: " +
+  x[i].getElementsByTagName("COUNTRY")[0].childNodes[0].nodeValue +
+  "<br>Company: " + 
+  x[i].getElementsByTagName("COMPANY")[0].childNodes[0].nodeValue;
+}
+</script>
+
+</body>
+
+</html>
